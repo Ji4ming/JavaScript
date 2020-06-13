@@ -1,0 +1,162 @@
+<!--JavaScriptNotes_Ji4ming_20200612-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScriptNotes_Ji4ming</title>
+
+    <!-- 外部 -->
+    <script src="myScript.js"></script>
+
+    <!-- 内部 -->
+    <!-- 在HTML body部分中的JavaScripts会在页面加载的时候被执行。
+         在HTML head部分中的JavaScripts会在被调用的时候才执行。 -->
+</head>
+<body>
+
+    <p id="message1"> message1 </p>
+    <p id="message2"> message2 </p>
+    <p id="message3"> message3 </p>
+    <a href="https://www.runoob.com/jsref/jsref-obj-string.html"> click here for more string functions </a><br>
+    <p id="message4"> message4 </p>
+
+    <div id="divp">
+        <p> add p from js script: </p>
+    </div>
+
+    <img src="resources/js1.jpg" alt="==="><br>
+
+    <p id="constructorusage"> constructor usage </p>
+    <p> constructor 判断是否为日期: </p>
+    <p id="isdate"></p>
+    <p> constructor 判断是否为数组: </p>
+    <p id="isarray"></p>
+
+    <p> search 搜索字符串 "abc", 并显示匹配的起始位置：</p>
+    <button onclick="myFunctionSearch()"> click to search string "abc" position </button>
+    <p id="searchusage"></p>
+
+    <p> search 替换字符串 "abc" -> "cba"：</p>
+    <button onclick="myFunctionReplace()"> click to replace string "abc" to "cba" </button>
+    <p id="replaceusage"></p>
+
+    <p> try catch throw finally 的易懂用法：</p>
+    <a href="https://www.runoob.com/try/try.php?filename=tryjs_throw_error"> click here for try catch throw finally usage </a>
+
+    <p> JavaScript 多用于组件的有效性检测：</p>
+    <a href="https://www.runoob.com/js/js-validation.html"> click here for an instance </a><br>
+
+    <p> JavaScript：void(0) </p>
+    <a href="javascript:void(0)">单此处什么也不会发生</a><br>
+
+    <p> JavaScript HTML DOM Event: </p>
+    <a href="https://www.runoob.com/js/js-htmldom-events.html"> click here for more instances </a><br>
+
+    <p> JavaScript HTML DOM EventListener: </p>
+    <a href="https://www.runoob.com/js/js-htmldom-eventlistener.html"> click here for more instances </a><br>
+
+    <p> JavaScript 中关于数组的更多实例: </p>
+    <a href="https://www.runoob.com/js/js-obj-array.html"> click here for more instances </a><br>
+    <img src="resources/js2.jpg" alt="jsarr"><br>
+
+    <p id="round">单击按钮舍入与“2.5”最接近的整数</p>  <!-- random() -->
+    <button onclick="myFunctionRound()">点我</button>
+
+    <p id="window"> JavaScript window 浏览器对象模型 </p>  <!-- random() -->
+    <a href="https://www.runoob.com/js/js-window.html"> click here for more on window operations </a><br>
+
+    <script>
+
+        // "use strict"
+
+        var a = true;
+        document.write = ("<p> document write </p>");   // TODO: doesn't work
+        document.getElementById("message1").innerHTML = "changed message1";
+        document.getElementById("message2").innerHTML = Date();
+        document.getElementById("message3").innerHTML = "variable a is a " + typeof a;
+
+        // 特别好的 "===" 例子
+        var x = "John";              // x 是字符串
+        var y = new String("John");  // y 是一个对象
+        document.getElementById("message4").innerHTML = x===y;
+
+        // break 直接跳出整个 for 循环
+        // continue 跳过该条件的循环
+
+        document.getElementById("constructorusage").innerHTML =
+            "constructor usage:" + "<br>" +
+            "john".constructor + "<br>" +
+            (3.14).constructor + "<br>" +
+            false.constructor + "<br>" +
+            [1,2,3,4].constructor + "<br>" +
+            {name:'john', age:34}.constructor + "<br>" +
+            new Date().constructor + "<br>" +
+            function () {}.constructor;
+
+        var fruits = ["Banana", "Orange", "Apple", "Mango"];
+        document.getElementById("isarray").innerHTML = isArray(fruits);
+
+        var myDate = new Date();innerHTML = isDate(myDate);
+        document.getElementById("isdate").innerHTML = isDate(myDate);
+
+        // String Search
+        function myFunctionSearch() {
+            var str = "这是一个含有abc的字符串";
+            var place = str.search("abc");
+            // var place = str.search(/abc/i);
+            document.getElementById("searchusage").innerHTML = place;
+        }
+
+        // String Replace
+        function myFunctionReplace() {
+            var str = "这是一个含有abc的字符串";
+            var txt = str.replace("abc","cba");   // abc -> cba
+            // var txt = str.replace(/abc/i, "cba");
+            document.getElementById("replaceusage").innerHTML = txt;
+        }
+
+        function myFunctionRound(){
+            document.getElementById("round").innerHTML=Math.round(2.5);
+        }
+
+        /*
+
+        正则表达式多用于判断输入字符串的类型
+
+        正则表达式修饰符:
+        i	执行对大小写不敏感的匹配。
+        g	执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。
+        m	执行多行匹配。
+
+        [abc]	查找方括号之间的任何字符。
+        [0-9]	查找任何从 0 至 9 的数字。
+        (x|y)	查找任何以 | 分隔的选项。
+
+        \d	查找数字。
+        \s	查找空白字符。
+        \b	匹配单词边界。
+        \uxxxx	查找以十六进制数 xxxx 规定的 Unicode 字符。
+
+        n+	匹配任何包含至少一个 n 的字符串。
+        n*	匹配任何包含零个或多个 n 的字符串。
+        n?	匹配任何包含零个或一个 n 的字符串。
+
+        test() 方法用于检测一个字符串是否匹配某个模式，如果括号中的字符串含有匹配的文本，则返回 true，否则返回 false。
+
+        */
+
+        var para = document.createElement("p");
+        var node = document.createTextNode("这是一个新的段落。");
+        para.appendChild(node);
+
+        var element = document.getElementById("divp");
+        element.appendChild(para);
+        // element.insertBefore(para, child);  在某一段落之前插入段落
+        // parent.removeChild(child);  移除已存在的元素
+        // parent.replaceChild(para, child);   替换元素
+
+    </script>
+
+</body>
+</html>
